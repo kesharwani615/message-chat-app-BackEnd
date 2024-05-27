@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "script": "nodemon backEnd/index.js"
+    "script": "nodemon index.js"
   },
   "type": "module",
   "keywords": [],
