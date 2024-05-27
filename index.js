@@ -24,11 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use(cors({
-    origin:"http://localhost:5173",
-    methods:"GET,POST,PUT,DELETE",
-    credentials:true
-}));
+app.use(cors());
 
 app.use(express.json());
 
