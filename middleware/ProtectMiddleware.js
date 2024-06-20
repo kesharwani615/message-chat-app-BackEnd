@@ -3,33 +3,46 @@ import User from "../models/userModels.js";
 
 const ProtectMiddleware = async (req, res, next) => {
 	try {
-		//for frontend token
-		const token = req.headers.authorization;
-		//for using post cookie
-		// const token=req.cookies.sessionToken;
-		if (!token) {
-			return res.status(401).json({ error: "Unauthorized - No Token Provided" });
-		}
+	  // Retrieve token from headers
+	  const token = req.headers.authorization;
+	  // For using post cookie, uncomment the next line
+	  // const token = req.cookies.sessionToken;
 
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	  console.log("token:",token)
+  
+	  if (!token) {
+		return res.status(401).json({ error: "Unauthorized - No Token Provided" });
+	  }
+  
+	  let decoded;
+	  try {
+		decoded = jwt.verify(token, process.env.JWT_SECRET);
+		console.log("===",decoded) 
 
-		if (!decoded) {
-			return res.status(401).json({ error: "Unauthorized - Invalid Token" });
-		}
+	  } catch (err) {
+		return res.status(401).json({ error: "Unauthorized - Invalid Token" });
+	  }
+      console.log("----",decoded,JSON.stringify(decoded)) 
 
-		const user = await User.findById(decoded.userId).select("-password");
+	  if (!decoded || !decoded.userId) {
+		return res.status(401).json({ error: "Unauthorized - Invalid Token Data" });
+	  }
+  
+	  const user = await User.findById(decoded.userId).select("-password");
 
-		if (!user) {
-			return res.status(404).json({ error: "User not found" });
-		}
-
-		req.user = user;
-
-		next();
+	  console.log(user)
+  
+	  if (!user) {
+		return res.status(404).json({ error: "User not found" });
+	  }
+  
+	  req.user = user;
+	  next();
 	} catch (error) {
-		console.log("Error in protectRoute middleware: ", error.message);
-		res.status(500).json({ error: "Internal server error" });
+	  console.log("Error in ProtectMiddleware: ", error.message);
+	  res.status(500).json({ error: "Internal server error" });
 	}
-};
-
-export default ProtectMiddleware;
+  };
+  
+  export default ProtectMiddleware;
+  

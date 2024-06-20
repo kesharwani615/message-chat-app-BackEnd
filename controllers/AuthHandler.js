@@ -5,7 +5,6 @@ import generateTokenAndSetCookie from "../tokenGenerator/generateToken.js";
 export const signup = async (req, res) => {
 	try {
 		const { fullName, username, password, gender } = req.body;
-        // console.log( fullName, username, password, gender );
 
 		// if (password !== confirmPassword) {
 		// 	return res.status(400).json({ error: "Passwords don't match" });
@@ -34,6 +33,8 @@ export const signup = async (req, res) => {
 			profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
 		});
 
+
+
 		if (newUser) {
 			// Generate JWT token here
 			const Token = generateTokenAndSetCookie(newUser._id, res);
@@ -41,10 +42,10 @@ export const signup = async (req, res) => {
 			res.status(201).json({
 				token: Token,
 				userDetail:{
-					_id: user._id,
-					fullName: user.fullName,
-					username: user.username,
-					profilePic: user.profilePic,
+					_id: newUser._id,
+					fullName: newUser.fullName,
+					username: newUser.username,
+					profilePic: newUser.profilePic,
 				}		
 			});
 		} else {
@@ -59,6 +60,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
 	try {
 		const { username, password } = req.body;
+		console.log(username, password);
 		const user = await User.findOne({ username });
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 

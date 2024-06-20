@@ -9,7 +9,7 @@ export const sendMessage = async (req, res) => {
       const { id: receiverId } = req.params;
       const senderId = req.user._id;
 
-    //   console.log(getMessage,receiverId);
+      console.log('>>',getMessage,receiverId);
 
       let conversationMsg = await Conversation.findOne({ participants: { $all: [receiverId, senderId] } }).populate("messages");
 
@@ -67,7 +67,7 @@ export const getMessage = async(req,res) => {
     
     // console.log("getAllMessage:",getAllMessage);
 
-    if(!getAllMessage) return res.status(500).json({message:"nothing"});
+    if(!getAllMessage) return res.status(404).json({message:"nothing"});
 
     res.status(200).json({message:getAllMessage.messages});   
 

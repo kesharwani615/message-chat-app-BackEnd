@@ -30,14 +30,14 @@ app.use(express.json());
 
 app.use('/api/auth',AuthRouter);
 app.use('/api/message',MessageRouter);
-app.use('/api/user/',userRouter);
+app.use('/api/user',userRouter);
 
-app.use('/api/group/',GroupRouter);
+app.use('/api/group',GroupRouter);
 
 // app.use("/auth", authRoute);
 
 
 server.listen(port,()=>{
 ConnectToMongo();
-console.log('server is running!');
+console.log('server is running!',port);
 });

@@ -72,22 +72,6 @@ export const sendMessage=async (req,res)=>{
 // Custom function to send message to a room using room ID
     const roomId=provideRoomId();
 
-    // async function sendMessageToRoom( sendMessageInGrp) {
-    //     console.log("Socket:",roomSocketMap);
-    //     console.log("roomId:",roomId);
-    //     console.log("Socket:",roomSocketMap[roomId]);
-
-    // const socketId = roomSocketMap[roomId];
-    // console.log("socketId:",socketId);
-    // if (socketId) {
-    //     await io.to(socketId).emit('new message', sendMessageInGrp);
-    // } else {
-    //     console.log(`No user connected to room with ID ${roomId}.`);    
-    // }
-    // }
-    // sendMessageToRoom(sendMessageInGrp);
-
-    // console.log(sendMessageInGrp);
     if(result.error) throw new Error(data.error); 
 
     res.status(200).json(sendMessageInGrp)
