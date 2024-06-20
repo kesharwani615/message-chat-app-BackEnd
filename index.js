@@ -12,7 +12,7 @@ import cors from 'cors';
 import { app,server } from './socket/socket.js'
 // import authRoute from "./router/auth.js"
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
 const port = process.env.PORT || 5000;
 dotenv.config();
 // const app=express();
@@ -39,7 +39,7 @@ app.use('/api/group',GroupRouter);
 // app.use("/auth", authRoute);
 
 
-server.listen(port,()=>{
+// server.listen(port,()=>{
 server.listen(port,()=>{
 ConnectToMongo();
 console.log('server is running!',port);
