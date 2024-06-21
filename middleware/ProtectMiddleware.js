@@ -8,7 +8,7 @@ const ProtectMiddleware = async (req, res, next) => {
 	  // For using post cookie, uncomment the next line
 	  // const token = req.cookies.sessionToken;
 
-	  console.log("token:",token)
+	//   console.log("token:",token)
   
 	  if (!token) {
 		return res.status(401).json({ error: "Unauthorized - No Token Provided" });
@@ -30,10 +30,10 @@ const ProtectMiddleware = async (req, res, next) => {
   
 	  const user = await User.findById(decoded.userId).select("-password");
 
-	  console.log(user)
-  
+	  
 	  if (!user) {
-		return res.status(404).json({ error: "User not found" });
+		console.log(user)
+		return res.status(403).json({ error: "User not found" });
 	  }
   
 	  req.user = user;
