@@ -10,7 +10,7 @@ export const getAllSidebarUser = async (req, res) => {
 
       const getAllUser = await User.find({ _id: { $ne: loggedInUser } });
 
-      console.log("getAllUserqqq:",getAllUser);
+      // console.log(":",getAllUser);
   
       if (getAllUser.length > 0) {
         return res.status(200).json({ getAllUser });

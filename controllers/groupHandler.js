@@ -81,7 +81,7 @@ export const sendMessage=async (req,res)=>{
 }
 
 export const getMessage= async (req,res)=>{
-    console.log("group called:")
+    // console.log("group called:")
     try{
         const grpId=req.params.id;
         const senderId = req.user._id;

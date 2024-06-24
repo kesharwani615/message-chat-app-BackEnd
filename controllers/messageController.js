@@ -67,7 +67,7 @@ export const getMessage = async(req,res) => {
     
     // console.log("getAllMessage:",getAllMessage);
 
-    if(!getAllMessage) return res.status(404).json({message:"nothing"});
+    if(!getAllMessage) return res.status(200).json({message:[]});
 
     res.status(200).json({message:getAllMessage.messages});   
 
