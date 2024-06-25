@@ -4,9 +4,11 @@ const generateTokenAndSetCookie = (userId, res) => {
 
 	// console.log(userId,res)
 	// console.log(process.env.JWT_SECRET);
-	const token = jwt.sign({ userId }, process.env.JWT_SECRET,{
-		expiresIn: "1d",
-	});
+
+    const options = {
+    expiresIn: '1d' 
+    };
+	const token = jwt.sign({ userId }, process.env.JWT_SECRET,options);
      return token;
 	//   res.cookie("jwt", token, {
 	// 	maxAge: 15 * 24 * 60 * 60 * 1000, // MS
